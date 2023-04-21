@@ -1,3 +1,11 @@
+Proiecte SymfonyPHP / JavaScript:
+
+https://sva.edu
+https://web.archive.org/web/20210501210104/http://id.sva.edu/
+https://start.sva.edu/
+
+Proiecte e-comerce:
+
 https://pieseelectrocasnice.ro/
 https://piese-electrocasnice.ro/
 https://pieseutile.ro/
@@ -5,6 +13,9 @@ https://www.pieseall.ro/
 https://lumeapieselor.ro/
 https://www.ricambiservice.ro/
 https://magazin-de-piese.ro/
+
+Proiecte de prezentare (admin custom / wordpress):
+
 http://staelectrodomesticos.es/
 https://servicio-asistencia.org.es/
 https://reparacionamos.org.es/
