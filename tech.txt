@@ -1,8 +1,18 @@
+Proiecte actuale Wordpress:
+
+https://www.msichoices.org.uk/
+https://www.msichoices.org/
+https://www.freshlocations.com/
+
 Proiecte SymfonyPHP / JavaScript:
 
-https://sva.edu
+https://sva.edu/
 https://web.archive.org/web/20210501210104/http://id.sva.edu/
 https://start.sva.edu/
+
+
+Alte proiecte ce o sa poata fi urmarite cu https://archive.org/.
+
 
 Proiecte e-comerce:
 
