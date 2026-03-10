@@ -23,7 +23,12 @@
 
             {% if user != app.user %}
                 <br><br>
-                {% if 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles %}
+                {% if 'ROLE_ADMIN' in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles %}
+                    <form method="post" action="{{ path('app_admin_user_demote', {id: user.id}) }}" style="display:inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('demote' ~ user.id) }}">
+                        <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure you want to demote this user?')">Demote from Admin</button>
+                    </form>
+                {% elseif 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles %}
                     <form method="post" action="{{ path('app_admin_user_promote', {id: user.id}) }}" style="display:inline;">
                         <input type="hidden" name="_token" value="{{ csrf_token('promote' ~ user.id) }}">
                         <button type="submit" class="btn btn-primary">Promote to Admin</button>

@@ -54,4 +54,14 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_admin_users');
     }
+
+    #[Route('/users/{id}/demote', name: 'app_admin_user_demote', methods: ['POST'])]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
+    public function demoteUser(User $user, EntityManagerInterface $em): Response
+    {
+        $user->setRoles(['ROLE_USER']);
+        $em->flush();
+
+        return $this->redirectToRoute('app_admin_users');
+    }
 }
