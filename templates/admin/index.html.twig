@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block body %}
+    <h1>Admin Panel</h1>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('app_admin_users') }}" class="btn btn-primary">Manage Users</a>
+    {% endif %}
+
+    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back to Homepage</a>
+
+    <hr>
+
+    <h2 style="margin-bottom: 20px; color: #1a56db;">All Posts</h2>
+
+    {% for post in posts %}
+        <div class="card">
+            <h3>{{ post.title }}</h3>
+            <small>
+                By {{ post.user.email }}
+                on {{ post.createdAt|date('d M Y') }}
+            </small>
+            <p>{{ post.content|slice(0, 200) }}...</p>
+            <br>
+            <a href="{{ path('app_post_edit', {id: post.id}) }}" class="btn btn-secondary">Edit</a>
+
+            <form method="post" action="{{ path('app_post_delete', {id: post.id}) }}" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="card">
+            <p>No posts found.</p>
+        </div>
+    {% endfor %}
+{% endblock %}

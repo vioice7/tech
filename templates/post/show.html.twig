@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back to Homepage</a>
+
+    <br><br>
+
+    <div class="card">
+        <h1>{{ post.title }}</h1>
+        <small>By {{ post.user.email }} on {{ post.createdAt|date('d M Y') }}</small>
+        <hr>
+        <p style="line-height: 1.9; font-size: 16px;">{{ post.content }}</p>
+    </div>
+{% endblock %}

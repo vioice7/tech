@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TechBlog - Home{% endblock %}
+
+{% block body %}
+    <h1>Latest Posts</h1>
+
+    {% for post in posts %}
+        <div class="card">
+            <h2><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></h2>
+            <small>By {{ post.user.email }} on {{ post.createdAt|date('d M Y') }}</small>
+            <p>{{ post.content|slice(0, 200) }}...</p>
+            <br><br>
+            <a href="{{ path('app_post_show', {id: post.id}) }}" class="btn btn-primary">Read more</a>
+        </div>
+    {% else %}
+        <div class="card">
+            <p>No posts yet.</p>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        {{ knp_pagination_render(posts) }}
+    </div>
+{% endblock %}

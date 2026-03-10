@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block body %}
+    <h1>My Posts</h1>
+
+    <a href="{{ path('app_post_new') }}" class="btn btn-good">New Post</a>
+
+    <hr>
+
+    {% for post in posts %}
+        <div class="card">
+            <h2>{{ post.title }}</h2>
+            <small>{{ post.createdAt|date('d M Y') }}</small>
+            <p>{{ post.content|slice(0, 200) }}...</p>
+            <br>
+            <a href="{{ path('app_post_edit', {id: post.id}) }}" class="btn btn-secondary">Edit</a>
+
+            <form method="post" action="{{ path('app_post_delete', {id: post.id}) }}" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="card">
+            <p>You have no posts yet. <a href="{{ path('app_post_new') }}">Create your first one!</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}

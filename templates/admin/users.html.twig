@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block body %}
+    <h1>Manage Users</h1>
+
+    <a href="{{ path('app_admin') }}" class="btn btn-secondary">Back to Admin Panel</a>
+
+    <hr>
+
+    {% for user in users %}
+        <div class="card">
+            <strong style="font-size: 17px;">{{ user.email }}</strong>
+            <br><br>
+            <small>Roles: 
+                {% for role in user.roles %}
+                    <span style="background: #bee3f8; color: #1a56db; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                        {{ role }}
+                    </span>
+                {% endfor %}
+            </small>
+
+            {% if user != app.user %}
+                <br><br>
+                {% if 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles %}
+                    <form method="post" action="{{ path('app_admin_user_promote', {id: user.id}) }}" style="display:inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('promote' ~ user.id) }}">
+                        <button type="submit" class="btn btn-primary">Promote to Admin</button>
+                    </form>
+                {% endif %}
+
+                <form method="post" action="{{ path('app_admin_user_delete', {id: user.id}) }}" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This will delete all their posts too!')">Delete User</button>
+                </form>
+            {% else %}
+                <br><br>
+                <span style="color: #718096; font-size: 13px;">(this is you)</span>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="card">
+            <p>No users found.</p>
+        </div>
+    {% endfor %}
+{% endblock %}

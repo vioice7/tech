@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}TechBlog{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f4f8;
+                color: #2d3748;
+            }
+
+            /* NAVBAR */
+            nav {
+                background-color: #18572e;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+
+            nav .logo {
+                color: white;
+                font-size: 22px;
+                font-weight: bold;
+                text-decoration: none;
+                letter-spacing: 1px;
+            }
+
+            nav .nav-links a {
+                color: #cce0ff;
+                text-decoration: none;
+                margin-left: 20px;
+                font-size: 15px;
+                transition: color 0.2s;
+            }
+
+            nav .nav-links a:hover {
+                color: white;
+            }
+
+            /* MAIN CONTAINER */
+            .container {
+                max-width: 860px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            /* CARDS */
+            .card {
+                background: white;
+                border-radius: 10px;
+                padding: 25px 30px;
+                margin-bottom: 25px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+                border-left: 4px solid #1a56db;
+                transition: transform 0.2s;
+            }
+
+            .card:hover {
+                transform: translateY(-2px);
+            }
+
+            .card h2, .card h3 {
+                color: #1a56db;
+                margin-bottom: 8px;
+            }
+
+            .card small {
+                color: #718096;
+                font-size: 13px;
+            }
+
+            .card p {
+                margin-top: 12px;
+                line-height: 1.7;
+                color: #4a5568;
+            }
+
+            /* BUTTONS */
+            .btn {
+                display: inline-block;
+                padding: 8px 18px;
+                border-radius: 6px;
+                font-size: 14px;
+                cursor: pointer;
+                text-decoration: none;
+                border: none;
+                transition: background 0.2s;
+            }
+
+            .btn-primary {
+                background-color: #1a56db;
+                color: white;
+            }
+
+            .btn-primary:hover {
+                background-color: #1446b8;
+            }
+
+            .btn-danger {
+                background-color: #e53e3e;
+                color: white;
+            }
+
+            .btn-danger:hover {
+                background-color: #c53030;
+            }
+
+            .btn-secondary {
+                background-color: #e2e8f0;
+                color: #2d3748;
+            }
+
+            .btn-secondary:hover {
+                background-color: #cbd5e0;
+            }
+
+            .btn-good {
+                background-color: #1a9b4b;
+                color: white;
+            }
+            .btn-good:hover {
+                background-color: #14823e;
+            }
+
+            /* FORMS */
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 6px;
+                font-weight: 600;
+                color: #2d3748;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px 14px;
+                border: 1px solid #cbd5e0;
+                border-radius: 6px;
+                font-size: 15px;
+                color: #2d3748;
+                background: #f7fafc;
+                transition: border 0.2s;
+            }
+
+            #registration_form_agreeTerms {
+                width: auto;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: #1a56db;
+                background: white;
+            }
+
+            .form-group textarea {
+                min-height: 180px;
+                resize: vertical;
+            }
+
+            /* PAGE TITLES */
+            h1 {
+                font-size: 28px;
+                color: #1a56db;
+                margin-bottom: 20px;
+            }
+
+            /* PAGINATION */
+            .pagination {
+                display: flex;
+                gap: 8px;
+                margin-top: 30px;
+                justify-content: center;
+            }
+
+            .pagination a, .pagination span {
+                padding: 8px 14px;
+                border-radius: 6px;
+                background: white;
+                color: #1a56db;
+                text-decoration: none;
+                border: 1px solid #bee3f8;
+                font-size: 14px;
+            }
+
+            .pagination .active {
+                background: #1a56db;
+                color: white;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #e2e8f0;
+                margin: 20px 0;
+            }
+
+            .flash-success {
+                background: #c6f6d5;
+                color: #276749;
+                padding: 12px 20px;
+                border-radius: 6px;
+                margin-bottom: 20px;
+            }
+
+            .flash-error {
+                background: #fed7d7;
+                color: #9b2c2c;
+                padding: 12px 20px;
+                border-radius: 6px;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <nav>
+            <a href="{{ path('app_home') }}" class="logo">📚 TechBlog</a>
+            <div class="nav-links">
+                {% if app.user %}
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}">Admin</a>
+                    {% endif %}
+                    <a href="{{ path('app_logout') }}">Logout ({{ app.user.email }})</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Login</a>
+                    <a href="{{ path('app_register') }}">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+
+    </body>
+</html>
